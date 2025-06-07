@@ -1,15 +1,29 @@
 <fable>
-  <config font-family="Poppins" />
+  <property name="itens" default="5" />
+  <property name="selecionado" default="2" />
 
-  <!-- Página simples com mensagem "Hello World" -->
-  <page id="helloWorld" bg_color="#ffffff">
-    <agent
-      id="hello"
-      x="center"
-      y="center"
-      text="Hello World"
-      color="black"
-      font-size="32"
-    />
+  <page id="exemplo" bg_color="#f0f0f0">
+    <!-- Loop através de itens -->
+    <fab-for each="i in $itens">
+      <!-- Condição dentro do loop -->
+      <fab-if when="$i = $selecionado">
+        <agent
+          id="item-$i"
+          x="100 + $i * 80"
+          y="200"
+          text="Item Selecionado: $i"
+          color="green"
+        />
+      </fab-if>
+      <fab-if when="$i != $selecionado">
+        <agent
+          id="item-$i"
+          x="100 + $i * 80"
+          y="200"
+          text="Item: $i"
+          color="gray"
+        />
+      </fab-if>
+    </fab-for>
   </page>
 </fable>
