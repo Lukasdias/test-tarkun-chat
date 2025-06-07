@@ -15,13 +15,5 @@
       width="200"
       image="forest-hero-idle.png"
     />
-
-    <!-- HUD no canto (centro em 100,50) -->
-    <agent id="vida" x="100" y="50" text="❤️ $vidas" />
-
-    <!-- Inventário centralizado -->
-    <fab-for each="item in 10" index="i">
-      <agent id="k-$i" x="400 + ($i - 2) * 80" y="500" image="$item" />
-    </fab-for>
   </page>
 </fable>
