@@ -2,8 +2,8 @@
   <page id="helloWorld" bg_color="#2c3e50">
     <agent
       id="helloText"
-      x="400"
-      y="300"
+      x="center"
+      y="center"
       text="Hello World"
       color="#ecf0f1"
       font-size="24"
