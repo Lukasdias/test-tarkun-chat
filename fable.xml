@@ -5,8 +5,8 @@
   <page id="helloWorld" bg_color="#ffffff">
     <agent
       id="hello"
-      x="400"
-      y="300"
+      x="center"
+      y="center"
       text="Hello World"
       color="black"
       font-size="32"
