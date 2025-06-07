@@ -8,5 +8,14 @@
       color="#ecf0f1"
       font-size="24"
     />
+    <agent id="heroi" x="400" y="300" image="heroi.png" />
+
+    <!-- HUD no canto (centro em 100,50) -->
+    <agent id="vida" x="100" y="50" text="❤️ $vidas" />
+
+    <!-- Inventário centralizado -->
+    <fab-for each="item in $itens" index="i">
+      <agent id="item-$i" x="400 + ($i - 2) * 80" y="500" image="$item" />
+    </fab-for>
   </page>
 </fable>
