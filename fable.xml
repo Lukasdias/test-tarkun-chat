@@ -1,5 +1,12 @@
 <fable>
-  <page id="helloWorldPage" bg_color="#ffffff">
-    <agent id="helloWorld" x="100" y="100" text="Hello World" color="black" />
+  <page id="helloWorld" bg_color="#2c3e50">
+    <agent
+      id="helloText"
+      x="400"
+      y="300"
+      text="Hello World"
+      color="#ecf0f1"
+      font-size="24"
+    />
   </page>
 </fable>
