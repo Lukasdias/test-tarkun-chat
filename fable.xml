@@ -1,19 +1,79 @@
 <fable>
-  <page id="helloWorld" bg_color="#2c3e50">
+  <property name="chave1" default="false" />
+  <property name="chave2" default="false" />
+
+  <page id="sala1" bg_color="#34495e">
     <agent
-      id="helloText"
-      x="center"
-      y="center"
-      text="Hello World"
+      id="porta1"
+      x="400"
+      y="300"
+      text="Porta Trancada"
       color="#ecf0f1"
       font-size="24"
     />
     <agent
-      id="heroi"
+      id="enigma1"
+      x="400"
+      y="400"
+      text="Resolva: 2 + 2 = ?"
+      color="#ecf0f1"
+      font-size="18"
+    />
+    <agent
+      id="resposta1"
+      x="400"
+      y="450"
+      text="Clique aqui para responder 4"
+      color="#27ae60"
+      font-size="16"
+      on_click="set(chave1, true); goToPage('sala2')"
+    />
+  </page>
+
+  <page id="sala2" bg_color="#2c3e50">
+    <agent
+      id="porta2"
       x="400"
       y="300"
-      width="200"
-      image="forest-hero-idle.png"
+      text="Porta Trancada"
+      color="#ecf0f1"
+      font-size="24"
+    />
+    <agent
+      id="enigma2"
+      x="400"
+      y="400"
+      text="Resolva: 5 - 3 = ?"
+      color="#ecf0f1"
+      font-size="18"
+    />
+    <agent
+      id="resposta2"
+      x="400"
+      y="450"
+      text="Clique aqui para responder 2"
+      color="#27ae60"
+      font-size="16"
+      on_click="set(chave2, true); goToPage('sala3')"
+    />
+  </page>
+
+  <page id="sala3" bg_color="#1abc9c">
+    <agent
+      id="porta3"
+      x="400"
+      y="300"
+      text="Você Escapou!"
+      color="#ecf0f1"
+      font-size="24"
+    />
+    <agent
+      id="final"
+      x="400"
+      y="400"
+      text="Parabéns, você completou o escape room!"
+      color="#ecf0f1"
+      font-size="18"
     />
   </page>
 </fable>
