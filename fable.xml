@@ -6,7 +6,7 @@
   <property name="numeros" default="[10, 20, 30, 40, 50]" />
   <property name="indice" default="0" />
 
-  <page id="exemplo" bg_color="#f0f8ff">
+  <page id="exemplo" bg_color="red">
     <!-- Acesso direto -->
     <agent id="test1" x="50" y="50" text="Primeira fruta: $frutas[0]" />
 
