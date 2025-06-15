@@ -1,87 +1,161 @@
 <fable>
-  <property
-    name="tarefas"
-    default="['Estudar FableML', 'Fazer exercícios', 'Criar projeto']"
-  />
-  <property name="tarefa_atual" default="0" />
+  <config font-family="Poppins" />
 
-  <page id="todo-list" bg_color="#34495e">
-    <!-- Cabeçalho -->
+  <!-- Propriedades de exemplo com arrays -->
+  <property
+    name="frutas"
+    default="['maçã', 'banana', 'laranja', 'uva', 'pêra']"
+  />
+  <property name="pontuacoes" default="[10, 25, 50, 75, 100]" />
+  <property name="indice_atual" default="0" />
+  <property name="multiplicador" default="2" />
+
+  <page id="exemplo-arrays" bg_color="#f0f8ff">
+    <!-- Exemplo 1: Acesso direto por índice -->
     <agent
-      id="header"
-      x="400"
-      y="60"
-      text="📝 Lista de Tarefas ($tarefas.length restantes)"
-      color="#ffffff"
+      id="fruta-primeira"
+      x="50"
+      y="50"
+      text="Primeira fruta: $frutas[0]"
+      color="#2d5016"
       font-size="18"
     />
 
-    <!-- Lista de tarefas -->
-    <fab-for each="tarefa in $tarefas" index="i">
-      <agent
-        id="tarefa-$i"
-        x="100"
-        y="$i * 60 + 140"
-        text="☐ $tarefa"
-        color="#ffffff"
-        font-size="16"
-      />
+    <agent
+      id="fruta-terceira"
+      x="50"
+      y="90"
+      text="Terceira fruta: $frutas[2]"
+      color="#2d5016"
+      font-size="18"
+    />
 
-      <!-- Botão para completar tarefa -->
-      <agent
-        id="completar-$i"
-        x="600"
-        y="$i * 60 + 140"
-        text="✅ Completar"
-        bg_color="#27ae60"
-        color="white"
-        width="100"
-        height="35"
-        on_click="remove(tarefas, $i); playSound('osts-victory.mp3')"
-      />
-    </fab-for>
+    <!-- Exemplo 2: Acesso usando variável como índice -->
+    <agent
+      id="fruta-atual"
+      x="50"
+      y="130"
+      text="Fruta atual (índice $indice_atual): $frutas[$indice_atual]"
+      color="#1a472a"
+      font-size="18"
+    />
 
-    <!-- Mensagem quando não há tarefas -->
-    <fab-if when="$tarefas.length = 0">
+    <!-- Exemplo 3: Acesso usando expressão matemática -->
+    <agent
+      id="fruta-seguinte"
+      x="50"
+      y="170"
+      text="Próxima fruta: $frutas[$indice_atual + 1]"
+      color="#1a472a"
+      font-size="18"
+    />
+
+    <agent
+      id="fruta-multiplicada"
+      x="50"
+      y="210"
+      text="Fruta no índice multiplicado: $frutas[$indice_atual * $multiplicador]"
+      color="#1a472a"
+      font-size="18"
+    />
+
+    <!-- Exemplo 4: Usando arrays numéricos em cálculos -->
+    <agent
+      id="pontuacao-atual"
+      x="50"
+      y="270"
+      text="Pontuação atual: $pontuacoes[$indice_atual] pontos"
+      color="#8b0000"
+      font-size="18"
+    />
+
+    <agent
+      id="pontuacao-dobrada"
+      x="50"
+      y="310"
+      text="Pontuação dobrada: $pontuacoes[$indice_atual] × 2 = $pontuacoes[$indice_atual] * 2"
+      color="#8b0000"
+      font-size="18"
+    />
+
+    <!-- Exemplo 5: Condicionais com arrays -->
+    <fab-if when="$frutas[$indice_atual] = 'maçã'">
       <agent
-        id="sem-tarefas"
+        id="mensagem-maca"
         x="400"
-        y="200"
-        text="🎉 Todas as tarefas foram completadas!"
-        color="#f1c40f"
-        font-size="18"
+        y="100"
+        text="🍎 Você escolheu uma maçã!"
+        color="#ff4500"
+        font-size="20"
         animation="bounce-in"
-      />
-
-      <agent
-        id="reiniciar"
-        x="400"
-        y="250"
-        text="🔄 Adicionar Novas Tarefas"
-        on_click="append(tarefas, 'Nova tarefa 1'); 
-                       append(tarefas, 'Nova tarefa 2')"
       />
     </fab-if>
 
-    <!-- Ações extras -->
+    <fab-if when="$pontuacoes[$indice_atual] > 30">
+      <agent
+        id="boa-pontuacao"
+        x="400"
+        y="150"
+        text="🌟 Boa pontuação: $pontuacoes[$indice_atual]!"
+        color="#ffd700"
+        font-size="18"
+        animation="glow"
+      />
+    </fab-if>
+
+    <!-- Exemplo 6: Botões interativos -->
     <agent
-      id="remover-primeira"
-      x="150"
-      y="450"
-      text="❌ Cancelar Primeira"
-      bg_color="#e67e22"
-      color="white"
-      on_click="remove(tarefas, 0)"
+      id="btn-anterior"
+      x="50"
+      y="400"
+      text="◀ Anterior"
+      color="#ffffff"
+      bg_color="#4169e1"
+      animation="hover-glow"
+      on_click="set(indice_atual, $indice_atual - 1)"
     />
 
     <agent
-      id="limpar-tudo"
-      x="400"
-      y="450"
-      text="🧹 Limpar Tudo"
-      bg_color="#e74c3c"
-      color="white"
-      on_click="clear(tarefas)"
+      id="btn-proximo"
+      x="200"
+      y="400"
+      text="Próximo ▶"
+      color="#ffffff"
+      bg_color="#4169e1"
+      animation="hover-glow"
+      on_click="set(indice_atual, $indice_atual + 1)"
     />
+
+    <!-- Exemplo 7: Posicionamento dinâmico usando arrays -->
+    <property name="posicoes_x" default="[100, 200, 300, 400, 500]" />
+
+    <fab-for each="i in 5" index="idx">
+      <agent
+        id="circulo-$idx"
+        x="$posicoes_x[$idx]"
+        y="500"
+        width="30"
+        height="30"
+        bg_color="#ff69b4"
+        radius="15"
+        text="$idx"
+        color="#ffffff"
+        font-size="14"
+      />
+    </fab-for>
+
+    <!-- Exemplo 8: Usando arrays em fab-for -->
+    <fab-for each="fruta in $frutas" index="i">
+      <fab-if when="$i < 3">
+        <agent
+          id="lista-fruta-$i"
+          x="600"
+          y="$50 + $i * 40"
+          text="$i: $fruta"
+          color="#654321"
+          font-size="16"
+        />
+      </fab-if>
+    </fab-for>
   </page>
 </fable>
