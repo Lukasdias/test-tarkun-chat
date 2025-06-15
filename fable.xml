@@ -1,26 +1,43 @@
 <fable>
-  <property name="inventario" default="['espada', 'escudo', 'poção']" />
-  <property name="danos" default="[10, 15, 25]" />
-  <property name="item_ativo" default="0" />
+  <config font-family="Poppins" />
 
-  <page id="jogo">
-    <!-- Mostra item atual -->
-    <agent id="item" x="100" y="100" text="Item: $inventario[$item_ativo]" />
+  <!-- Arrays nas propriedades -->
+  <property name="frutas" default="['maçã', 'banana', 'laranja', 'uva']" />
+  <property name="numeros" default="[10, 20, 30, 40, 50]" />
+  <property name="indice" default="0" />
 
-    <!-- Mostra dano -->
-    <agent id="dano" x="100" y="140" text="Dano: $danos[$item_ativo]" />
+  <page id="exemplo" bg_color="#f0f8ff">
+    <!-- Acesso direto -->
+    <agent id="test1" x="50" y="50" text="Primeira fruta: $frutas[0]" />
 
-    <!-- Navegação -->
+    <!-- Acesso com variável -->
+    <agent id="test2" x="50" y="90" text="Fruta atual: $frutas[$indice]" />
+
+    <!-- Acesso com expressão -->
     <agent
-      id="proximo"
-      x="100"
-      y="200"
-      text="Próximo: $inventario[$item_ativo + 1]"
+      id="test3"
+      x="50"
+      y="130"
+      text="Próxima fruta: $frutas[$indice + 1]"
     />
 
-    <!-- Condicionais -->
-    <fab-if when="$inventario[$item_ativo] = 'espada'">
-      <agent id="especial" x="100" y="240" text="⚔️ Arma lendária!" />
+    <!-- Condicionais com arrays -->
+    <fab-if when="$frutas[0] = 'maçã'">
+      <agent id="condicional" x="50" y="170" text="✅ Primeira fruta é maçã!" />
     </fab-if>
+
+    <!-- Loops com arrays -->
+    <fab-for each="i in 3">
+      <agent id="loop-$i" x="$i * 100" y="200" text="$frutas[$i]" color="red" />
+    </fab-for>
+
+    <!-- Botões interativos -->
+    <agent
+      id="botao"
+      x="50"
+      y="250"
+      text="Próximo"
+      on_click="set(indice, $indice + 1)"
+    />
   </page>
 </fable>
