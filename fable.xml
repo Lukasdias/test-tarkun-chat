@@ -9,6 +9,7 @@
   <property name="pontuacoes" default="[10, 25, 50, 75, 100]" />
   <property name="indice_atual" default="0" />
   <property name="multiplicador" default="2" />
+  <property name="posicoes_x" default="[100, 200, 300, 400, 500]" />
 
   <page id="exemplo-arrays" bg_color="#f0f8ff">
     <!-- Exemplo 1: Acesso direto por índice -->
@@ -127,7 +128,6 @@
     />
 
     <!-- Exemplo 7: Posicionamento dinâmico usando arrays -->
-    <property name="posicoes_x" default="[100, 200, 300, 400, 500]" />
 
     <fab-for each="i in 5" index="idx">
       <agent
