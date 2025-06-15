@@ -1,161 +1,26 @@
 <fable>
-  <config font-family="Poppins" />
+  <property name="inventario" default="['espada', 'escudo', 'poção']" />
+  <property name="danos" default="[10, 15, 25]" />
+  <property name="item_ativo" default="0" />
 
-  <!-- Propriedades de exemplo com arrays -->
-  <property
-    name="frutas"
-    default="['maçã', 'banana', 'laranja', 'uva', 'pêra']"
-  />
-  <property name="pontuacoes" default="[10, 25, 50, 75, 100]" />
-  <property name="indice_atual" default="0" />
-  <property name="multiplicador" default="2" />
-  <property name="posicoes_x" default="[100, 200, 300, 400, 500]" />
+  <page id="jogo">
+    <!-- Mostra item atual -->
+    <agent id="item" x="100" y="100" text="Item: $inventario[$item_ativo]" />
 
-  <page id="exemplo-arrays" bg_color="#f0f8ff">
-    <!-- Exemplo 1: Acesso direto por índice -->
+    <!-- Mostra dano -->
+    <agent id="dano" x="100" y="140" text="Dano: $danos[$item_ativo]" />
+
+    <!-- Navegação -->
     <agent
-      id="fruta-primeira"
-      x="50"
-      y="50"
-      text="Primeira fruta: $frutas[0]"
-      color="#2d5016"
-      font-size="18"
+      id="proximo"
+      x="100"
+      y="200"
+      text="Próximo: $inventario[$item_ativo + 1]"
     />
 
-    <agent
-      id="fruta-terceira"
-      x="50"
-      y="90"
-      text="Terceira fruta: $frutas[2]"
-      color="#2d5016"
-      font-size="18"
-    />
-
-    <!-- Exemplo 2: Acesso usando variável como índice -->
-    <agent
-      id="fruta-atual"
-      x="50"
-      y="130"
-      text="Fruta atual (índice $indice_atual): $frutas[$indice_atual]"
-      color="#1a472a"
-      font-size="18"
-    />
-
-    <!-- Exemplo 3: Acesso usando expressão matemática -->
-    <agent
-      id="fruta-seguinte"
-      x="50"
-      y="170"
-      text="Próxima fruta: $frutas[$indice_atual + 1]"
-      color="#1a472a"
-      font-size="18"
-    />
-
-    <agent
-      id="fruta-multiplicada"
-      x="50"
-      y="210"
-      text="Fruta no índice multiplicado: $frutas[$indice_atual * $multiplicador]"
-      color="#1a472a"
-      font-size="18"
-    />
-
-    <!-- Exemplo 4: Usando arrays numéricos em cálculos -->
-    <agent
-      id="pontuacao-atual"
-      x="50"
-      y="270"
-      text="Pontuação atual: $pontuacoes[$indice_atual] pontos"
-      color="#8b0000"
-      font-size="18"
-    />
-
-    <agent
-      id="pontuacao-dobrada"
-      x="50"
-      y="310"
-      text="Pontuação dobrada: $pontuacoes[$indice_atual] × 2 = $pontuacoes[$indice_atual] * 2"
-      color="#8b0000"
-      font-size="18"
-    />
-
-    <!-- Exemplo 5: Condicionais com arrays -->
-    <fab-if when="$frutas[$indice_atual] = 'maçã'">
-      <agent
-        id="mensagem-maca"
-        x="400"
-        y="100"
-        text="🍎 Você escolheu uma maçã!"
-        color="#ff4500"
-        font-size="20"
-        animation="bounce-in"
-      />
+    <!-- Condicionais -->
+    <fab-if when="$inventario[$item_ativo] = 'espada'">
+      <agent id="especial" x="100" y="240" text="⚔️ Arma lendária!" />
     </fab-if>
-
-    <fab-if when="$pontuacoes[$indice_atual] > 30">
-      <agent
-        id="boa-pontuacao"
-        x="400"
-        y="150"
-        text="🌟 Boa pontuação: $pontuacoes[$indice_atual]!"
-        color="#ffd700"
-        font-size="18"
-        animation="glow"
-      />
-    </fab-if>
-
-    <!-- Exemplo 6: Botões interativos -->
-    <agent
-      id="btn-anterior"
-      x="50"
-      y="400"
-      text="◀ Anterior"
-      color="#ffffff"
-      bg_color="#4169e1"
-      animation="hover-glow"
-      on_click="set(indice_atual, $indice_atual - 1)"
-    />
-
-    <agent
-      id="btn-proximo"
-      x="200"
-      y="400"
-      text="Próximo ▶"
-      color="#ffffff"
-      bg_color="#4169e1"
-      animation="hover-glow"
-      on_click="set(indice_atual, $indice_atual + 1)"
-    />
-
-    <!-- Exemplo 7: Posicionamento dinâmico usando arrays -->
-
-    <fab-for each="i in 5" index="idx">
-      <agent
-        id="circulo-$idx"
-        x="$posicoes_x[$idx]"
-        y="500"
-        width="30"
-        height="30"
-        bg_color="#ff69b4"
-        radius="15"
-        text="$idx"
-        color="#ffffff"
-        font-size="14"
-      />
-    </fab-for>
-
-    <!-- Exemplo 8: Usando arrays em fab-for -->
-    <fab-for each="fruta in $frutas" index="i">
-      <fab-if when="$i < 3">
-        <agent
-          id="lista-fruta-$i"
-          x="600"
-          y="$50 + $i * 40"
-          text="$i: $fruta"
-          color="#654321"
-          font-size="16"
-        />
-      </fab-if>
-    </fab-for>
   </page>
 </fable>
