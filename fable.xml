@@ -1,79 +1,160 @@
 <fable>
-  <property name="chave1" default="false" />
-  <property name="chave2" default="false" />
+  <config font-family="Poppins" />
+  
+  <!-- Propriedades para demonstrar sintaxe Python -->
+  <property name="inventario" default="['espada', 'escudo']" />
+  <property name="pontuacao" default="[100, 200, 150]" />
+  <property name="tarefas" default="['estudar', 'exercitar']" />
+  <property name="mensagem" default="Clique nos botões para testar!" />
 
-  <page id="sala1" bg_color="#34495e">
-    <agent
-      id="porta1"
-      x="400"
-      y="300"
-      text="Porta Trancada"
-      color="#ecf0f1"
-      font-size="24"
-    />
-    <agent
-      id="enigma1"
-      x="400"
-      y="400"
-      text="Resolva: 2 + 2 = ?"
-      color="#ecf0f1"
-      font-size="18"
-    />
-    <agent
-      id="resposta1"
-      x="400"
-      y="450"
-      text="Clique aqui para responder 4"
-      color="#27ae60"
-      font-size="16"
-      on_click="set(chave1, true); goToPage('sala2')"
-    />
-  </page>
+  <page id="demo" bg_color="#2c3e50">
+    <!-- Título -->
+    <agent id="titulo" x="400" y="50" 
+           text="🐍 Demo: Sintaxe Python para Arrays" 
+           color="#ecf0f1" font-size="24" />
 
-  <page id="sala2" bg_color="#2c3e50">
-    <agent
-      id="porta2"
-      x="400"
-      y="300"
-      text="Porta Trancada"
-      color="#ecf0f1"
-      font-size="24"
-    />
-    <agent
-      id="enigma2"
-      x="400"
-      y="400"
-      text="Resolva: 5 - 3 = ?"
-      color="#ecf0f1"
-      font-size="18"
-    />
-    <agent
-      id="resposta2"
-      x="400"
-      y="450"
-      text="Clique aqui para responder 2"
-      color="#27ae60"
-      font-size="16"
-      on_click="set(chave2, true); goToPage('sala3')"
-    />
-  </page>
+    <!-- Mensagem de status -->
+    <agent id="status" x="400" y="100" 
+           text="$mensagem" 
+           color="#f39c12" font-size="16" />
 
-  <page id="sala3" bg_color="#1abc9c">
-    <agent
-      id="porta3"
-      x="400"
-      y="300"
-      text="Você Escapou!"
-      color="#ecf0f1"
-      font-size="24"
-    />
-    <agent
-      id="final"
-      x="400"
-      y="400"
-      text="Parabéns, você completou o escape room!"
-      color="#ecf0f1"
-      font-size="18"
-    />
+    <!-- === SEÇÃO INVENTÁRIO === -->
+    <agent id="label-inv" x="100" y="150" 
+           text="🎒 Inventário:" 
+           color="#e74c3c" font-size="18" />
+
+    <!-- Mostra inventário atual -->
+    <agent id="inv-display" x="100" y="180" 
+           text="$inventario" 
+           color="#ecf0f1" font-size="14" />
+
+    <!-- Botões de inventário -->
+    <agent id="btn-add-pocao" x="100" y="220" 
+           text="➕ Adicionar Poção" 
+           color="#27ae60" font-size="14"
+           on_click="set(inventario, $inventario.append('poção')); set(mensagem, 'Poção adicionada!')" />
+
+    <agent id="btn-add-chave" x="250" y="220" 
+           text="🗝️ Adicionar Chave" 
+           color="#27ae60" font-size="14"
+           on_click="set(inventario, $inventario.append('chave')); set(mensagem, 'Chave obtida!')" />
+
+    <agent id="btn-remove-last" x="400" y="220" 
+           text="❌ Remover Último" 
+           color="#e74c3c" font-size="14"
+           on_click="set(inventario, $inventario.pop()); set(mensagem, 'Item removido!')" />
+
+    <agent id="btn-remove-espada" x="550" y="220" 
+           text="⚔️ Usar Espada" 
+           color="#e67e22" font-size="14"
+           on_click="set(inventario, $inventario.remove('espada')); set(mensagem, 'Espada usada!')" />
+
+    <agent id="btn-clear-inv" x="700" y="220" 
+           text="🗑️ Limpar Tudo" 
+           color="#95a5a6" font-size="14"
+           on_click="set(inventario, $inventario.clear()); set(mensagem, 'Inventário limpo!')" />
+
+    <!-- === SEÇÃO PONTUAÇÃO === -->
+    <agent id="label-score" x="100" y="280" 
+           text="🏆 Pontuações:" 
+           color="#9b59b6" font-size="18" />
+
+    <!-- Mostra pontuações -->
+    <agent id="score-display" x="100" y="310" 
+           text="$pontuacao" 
+           color="#ecf0f1" font-size="14" />
+
+    <!-- Mostra tamanho da lista -->
+    <agent id="score-count" x="100" y="340" 
+           text="Total de scores: $pontuacao.length" 
+           color="#3498db" font-size="14" />
+
+    <!-- Botões de pontuação -->
+    <agent id="btn-add-score" x="100" y="380" 
+           text="📈 +50 Pontos" 
+           color="#27ae60" font-size="14"
+           on_click="set(pontuacao, $pontuacao.append(50)); set(mensagem, 'Pontuação adicionada!')" />
+
+    <agent id="btn-add-bonus" x="250" y="380" 
+           text="💎 +500 Bônus" 
+           color="#f1c40f" font-size="14"
+           on_click="set(pontuacao, $pontuacao.append(500)); set(mensagem, 'Bônus obtido!')" />
+
+    <agent id="btn-reverse-scores" x="400" y="380" 
+           text="🔄 Inverter Ordem" 
+           color="#e67e22" font-size="14"
+           on_click="set(pontuacao, $pontuacao.reverse()); set(mensagem, 'Ordem invertida!')" />
+
+    <!-- === SEÇÃO TAREFAS === -->
+    <agent id="label-tasks" x="100" y="440" 
+           text="📝 Lista de Tarefas:" 
+           color="#16a085" font-size="18" />
+
+    <!-- Mostra tarefas -->
+    <agent id="tasks-display" x="100" y="470" 
+           text="$tarefas" 
+           color="#ecf0f1" font-size="14" />
+
+    <!-- Botões de tarefas -->
+    <agent id="btn-add-task" x="100" y="510" 
+           text="➕ Adicionar 'ler'" 
+           color="#27ae60" font-size="14"
+           on_click="set(tarefas, $tarefas.append('ler')); set(mensagem, 'Tarefa adicionada!')" />
+
+    <agent id="btn-urgent-task" x="250" y="510" 
+           text="🚨 Inserir Urgente" 
+           color="#e74c3c" font-size="14"
+           on_click="set(tarefas, $tarefas.insert(0, 'urgente!')); set(mensagem, 'Tarefa urgente inserida!')" />
+
+    <agent id="btn-complete-task" x="400" y="510" 
+           text="✅ Completar Última" 
+           color="#95a5a6" font-size="14"
+           on_click="set(tarefas, $tarefas.pop()); set(mensagem, 'Tarefa completada!')" />
+
+    <!-- === VERIFICAÇÕES CONDICIONAIS === -->
+    <agent id="label-checks" x="100" y="570" 
+           text="🔍 Verificações:" 
+           color="#34495e" font-size="18" />
+
+    <!-- Verifica se tem chave -->
+    <fab-if when="$inventario.count('chave')">
+      <agent id="has-key" x="100" y="600" 
+             text="🗝️ Você tem a chave!" 
+             color="#f1c40f" font-size="14" />
+    </fab-if>
+
+    <!-- Verifica se inventário está vazio -->
+    <fab-if when="$inventario.length = 0">
+      <agent id="empty-inv" x="100" y="630" 
+             text="🎒 Inventário vazio!" 
+             color="#e74c3c" font-size="14" />
+    </fab-if>
+
+    <!-- Verifica se tem muitas pontuações -->
+    <fab-if when="$pontuacao.length > 3">
+      <agent id="many-scores" x="300" y="600" 
+             text="🏆 Muitas pontuações!" 
+             color="#9b59b6" font-size="14" />
+    </fab-if>
+
+    <!-- === BOTÃO DE RESET === -->
+    <agent id="btn-reset" x="400" y="680" 
+           text="🔄 RESETAR TUDO" 
+           color="#c0392b" font-size="16"
+           on_click="set(inventario, ['espada', 'escudo']); set(pontuacao, [100, 200, 150]); set(tarefas, ['estudar', 'exercitar']); set(mensagem, 'Tudo resetado!')" />
+
+    <!-- === INSTRUÇÕES === -->
+    <agent id="instrucoes" x="600" y="600" 
+           text="💡 Use a sintaxe Python:
+• \$lista.append(item)
+• \$lista.pop()
+• \$lista.remove(item)
+• \$lista.insert(pos, item)
+• \$lista.clear()
+• \$lista.reverse()
+• \$lista.length
+• \$lista.count(item)
+• \$lista.index(item)" 
+           color="#7f8c8d" font-size="12" />
   </page>
 </fable>
